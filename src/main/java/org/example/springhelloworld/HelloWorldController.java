@@ -27,8 +27,14 @@ public class HelloWorldController {
         return "Message added!";
     }
 
-    @GetMapping("messages")
+    @GetMapping("/messages")
     public List<Message> getMessages() {
         return messages;
+    }
+
+    @DeleteMapping("/messages/{id}")
+    public String deleteMessage(@PathVariable String id) {
+        messages.stream().filter(m -> m.getId().equals(id)).findFirst().ifPresent(m -> messages.remove(m));
+        return "Message deleted!";
     }
 }
