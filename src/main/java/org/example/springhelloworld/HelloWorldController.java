@@ -1,9 +1,6 @@
 package org.example.springhelloworld;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +19,16 @@ public class HelloWorldController {
     @GetMapping("/hello/{name}")
     public String sayHello(@PathVariable String name) {
         return "Hello, " + name + "!";
+    }
+
+    @PostMapping("/messages")
+    public String addMessage(@RequestBody Message newMessage) {
+        messages.add(newMessage);
+        return "Message added!";
+    }
+
+    @GetMapping("messages")
+    public List<Message> getMessages() {
+        return messages;
     }
 }
